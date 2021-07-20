@@ -3,13 +3,13 @@ using System;
 using Xunit;
 using Xunit.Gherkin.Quick;
 
-
 using Northwind.Web.Services;
 using Northwind.Web.Models;
+using Xunit.Sdk;
 
 namespace Northwind.Test.Features
 {
-	[FeatureFile("./Features/WeatherForecast.feature")]
+    [FeatureFile("./Features/WeatherForecast.feature")]
 	public sealed class WeatherForecastFeature : Feature
 	{
 		private IWeatherForecastService _weather = null;
@@ -37,7 +37,12 @@ namespace Northwind.Test.Features
 		[When(@"I get the forecast for yesterday")]
 		public void I_get_the_forecast_for_yesterday()
 		{
-			_forecast = _weather.ForecastFor(DateTime.Now.AddDays(-1));
+			try{
+				_forecast = _weather.ForecastFor(DateTime.Now.AddDays(-1));
+				throw new XunitException("Expected _weather to throw Exception");
+			}catch(ArgumentException ex){
+				this._serviceException = ex;
+			}
 		}
 
 		[Then(@"the service should throw an argument exception")]

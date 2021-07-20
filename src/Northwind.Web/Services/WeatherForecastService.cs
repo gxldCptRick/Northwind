@@ -20,8 +20,12 @@ namespace Northwind.Web.Services
 
 		public WeatherForecast ForecastFor(DateTime dateTime)
 		{
+			if(dateTime < DateTime.Now){
+				throw new ArgumentException("Cannot get forecast for past date.");
+			}
+			
 			var rng = new Random();
-			var temperatureC = rng.Next(-20, 55);
+			var temperatureC = rng.Next(1, 55);
 			return new WeatherForecast
 			{
 					Date = dateTime,
