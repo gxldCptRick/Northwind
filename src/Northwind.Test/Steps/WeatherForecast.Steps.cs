@@ -40,7 +40,7 @@ namespace Northwind.Test.Features
 			_forecast = _weather.ForecastFor(DateTime.Now.AddDays(-1));
 		}
 
-		[Then(@"the service should throw an invalid argument exception")]
+		[Then(@"the service should throw an argument exception")]
 		public void The_service_should_throw_an_argument_exception()
 		{
 			Assert.IsType<ArgumentException>(_serviceException);
