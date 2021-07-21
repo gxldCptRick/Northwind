@@ -13,9 +13,10 @@ namespace Northwind.Web.Services
 
 	public class WeatherForecastService : IWeatherForecastService
 	{
+		private const string MildSummary = "Mild";
 		private static readonly string[] Summaries = new[]
 		{
-				"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+				"Freezing", "Bracing", "Chilly", "Cool", MildSummary, "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 		};
 
 		public WeatherForecast ForecastFor(DateTime dateTime)
@@ -35,7 +36,12 @@ namespace Northwind.Web.Services
 		}
 
 		public string SummaryFor(int temperature)
-		{
+		{	// Given more requirements would definitely rewrite this
+			// Currently only told about the Mild req of 70F which is roughly ~21.1 C
+			if(temperature >= 21){
+				return MildSummary;
+			}
+
 			var rng = new Random();
 			return Summaries[rng.Next(Summaries.Length)];
 		}
