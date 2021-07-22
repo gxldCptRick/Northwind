@@ -5,6 +5,6 @@
 <p aria-live="polite">Current count: <strong id="counter">{{ currentCount }}</strong></p>
 <div>
   <label for="n-value" id="n-value-label">N: </label>
-  <input id="n-value" type="number" min="1" [(ngModel)]="nValue"  />
+  <input id="n-value" type="number" [(ngModel)]="nValue"  />
 </div>
 <button id="increment" class="btn btn-primary" (click)="incrementCounter()">Increment</button>

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { CounterNComponent } from './counter-n.component';
 
@@ -8,7 +9,8 @@ describe('CounterNComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CounterNComponent ]
+      imports: [FormsModule],
+      declarations: [ CounterNComponent]
     })
     .compileComponents();
   }));
@@ -19,7 +21,13 @@ describe('CounterNComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Should have count 0 on load as well as increment by 1 when iniitially pressed', () => {
+    const countElement = fixture.nativeElement.querySelector('strong');
+    expect(countElement.textContent).toEqual('0');
+
+    const incrementButton = fixture.nativeElement.querySelector('button');
+    incrementButton.click();
+    fixture.detectChanges();
+    expect(countElement.textContent).toEqual('1');
   });
 });
